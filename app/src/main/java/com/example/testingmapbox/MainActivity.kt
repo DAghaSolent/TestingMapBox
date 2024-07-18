@@ -13,8 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.testingmapbox.ui.theme.TestingMapBoxTheme
 import com.mapbox.geojson.Point
 import com.mapbox.maps.MapboxExperimental
+import com.mapbox.maps.Style
 import com.mapbox.maps.extension.compose.MapboxMap
 import com.mapbox.maps.extension.compose.animation.viewport.MapViewportState
+import com.mapbox.maps.extension.compose.style.MapStyle
 
 class MainActivity : ComponentActivity() {
     @OptIn(MapboxExperimental::class)
@@ -25,12 +27,13 @@ class MainActivity : ComponentActivity() {
                 Modifier.fillMaxSize(),
                 mapViewportState = MapViewportState().apply {
                     setCameraOptions {
-                        zoom(2.0)
-                        center(Point.fromLngLat(-98.0, 39.5))
+                        zoom(13.0)
+                        center(Point.fromLngLat(-1.3649, 50.9161))
                         pitch(0.0)
                         bearing(0.0)
                     }
                 },
+                style = { MapStyle(style = Style.LIGHT)}
             )
         }
     }

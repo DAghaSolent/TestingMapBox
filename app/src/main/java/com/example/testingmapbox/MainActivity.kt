@@ -19,22 +19,35 @@ import com.mapbox.maps.extension.compose.animation.viewport.MapViewportState
 import com.mapbox.maps.extension.compose.style.MapStyle
 
 class MainActivity : ComponentActivity() {
-    @OptIn(MapboxExperimental::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MapboxMap(
-                Modifier.fillMaxSize(),
-                mapViewportState = MapViewportState().apply {
-                    setCameraOptions {
-                        zoom(13.0)
-                        center(Point.fromLngLat(-1.3649, 50.9161))
-                        pitch(0.0)
-                        bearing(0.0)
-                    }
-                },
-                style = { MapStyle(style = Style.LIGHT)}
-            )
+            TestingMapBoxTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MapComposable()
+                }
+            }
         }
     }
+}
+
+@OptIn(MapboxExperimental::class)
+@Composable
+fun MapComposable(){
+    MapboxMap(
+        Modifier.fillMaxSize(),
+        mapViewportState = MapViewportState().apply {
+            setCameraOptions {
+                zoom(13.0)
+                center(Point.fromLngLat(-1.3649, 50.9161))
+                pitch(0.0)
+                bearing(0.0)
+            }
+        },
+        style = { MapStyle(style = Style.LIGHT)}
+    )
 }
